@@ -1,0 +1,86 @@
+# 🎵 Music Playlist Manager
+
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Data Structures](https://img.shields.io/badge/Data_Structures-Doubly_Linked_List-blue?style=for-the-badge)
+
+A console-based Java application that simulates a music playlist. Built as a Data Structures microproject, this application uses a **custom Doubly Linked List** to manage songs, allowing seamless bi-directional navigation (Next/Previous), alongside a stack-based approach for tracking recently played tracks.
+
+> **Note:** This project implements its own Node and Linked List classes from scratch and does **not** rely on Java's built-in `java.util.LinkedList`.
+
+## ✨ Features
+
+- **Core Playlist Operations**: Add, Delete, and Search for songs by Title or Artist.
+- **Bi-Directional Playback**: Play the Next ($O(1)$) or Previous ($O(1)$) song instantly using Doubly Linked List pointers.
+- **Favorites System**: Toggle songs as favorites and view a dedicated list of favorite tracks.
+- **Recently Played History**: Automatically tracks the last 5 played songs using a fixed-capacity Array-based Stack (LIFO).
+- **Interactive CLI**: A user-friendly, loop-driven console menu with input validation and error handling.
+
+## 🧠 Data Structures Used
+
+1. **Doubly Linked List (`PlaylistLinkedList`)**
+   - **Why?** A playlist requires moving forward and backward natively. A doubly linked list allows $O(1)$ transitions to the `next` and `prev` nodes without needing to traverse the array or list from the beginning.
+   - **Pointers**: Maintains `head`, `tail`, and a `current` pointer to track the currently playing song.
+2. **Array-based Stack (`recentlyPlayed`)**
+   - **Why?** To keep a chronological history of played songs. As new songs are played, they are pushed to the top of the stack. If the capacity (5) is exceeded, older entries are shifted out.
+
+## ⏱️ Time Complexities
+
+| Operation | Time Complexity | Explanation |
+| :--- | :---: | :--- |
+| **Add Song** | $O(1)$ | Appends directly using the `tail` pointer. |
+| **Play Next/Prev** | $O(1)$ | Direct pointer jump (`current = current.next`). |
+| **Delete Song** | $O(N)$ | Requires sequential search to locate the node by ID, but $O(1)$ to re-link pointers once found. |
+| **Search Song** | $O(N)$ | Traverses the list from `head` to check titles/artists. |
+
+## 📂 Project Structure
+
+- `SongNode.java`: Defines the structure of a single node (ID, Title, Artist, Genre, Favorite Status, Prev Pointer, Next Pointer).
+- `PlaylistLinkedList.java`: Contains the core logic for memory management, pointer re-linking, and playlist operations.
+- `PlaylistManagerApp.java`: The main driver class containing the interactive `Scanner` menu loop.
+
+## 🚀 How to Compile and Run
+
+### Prerequisites
+- Java Development Kit (JDK) 8 or higher installed.
+
+### Steps
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/2025balkrishnakumbhar-tech/MusicPlaylistManager.git
+   cd MusicPlaylistManager
+   ```
+
+2. **Compile the Java files:**
+   ```bash
+   javac *.java
+   ```
+
+3. **Run the application:**
+   ```bash
+   java PlaylistManagerApp
+   ```
+
+## 🎮 Usage Example
+
+Upon running the application, you will be greeted with the main menu:
+
+```text
+========================================
+       MUSIC PLAYLIST MANAGER
+========================================
+1. Add Song
+2. Delete Song
+3. Search Song
+4. Display Playlist
+5. Play Next Song
+6. Play Previous Song
+7. Toggle Favorite
+8. Display Favorites
+9. Recently Played
+10. Exit
+Enter your choice (1-10): 
+```
+*Tip: The playlist comes pre-populated with a few sample songs so you can immediately test the `Display`, `Next`, and `Previous` features!*
+
+---
+*Developed for Data Structures Coursework.*
